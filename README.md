@@ -59,3 +59,6 @@ Unhandled exception. System.InvalidOperationException: The LINQ expression '__ty
    at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
    at ContainsOptimization.Program.Main(String[] args) in /Users/asger/Code/Aika/Aika-DevHelpers/efcore8contains/Program.cs:line 19
 ```
+
+## Breaking change
+The [docs](https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-8.0/breaking-changes#contains-in-linq-queries-may-stop-working-on-older-sql-server-versions) mentions the optimization to be a breaking change that may be mitigated by modifying it to either a higher level or by setting it below 130. Neither of these tricks work in this case.

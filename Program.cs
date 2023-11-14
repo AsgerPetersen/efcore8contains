@@ -14,8 +14,12 @@ namespace ContainsOptimization
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
-                var types = new[]{PersonType.Happy, PersonType.Sad};
-                
+                var compat_level = context.Database.SqlQueryRaw<Byte>("SELECT compatibility_level as Value FROM sys.databases").First();
+                Console.WriteLine($"Compatibility level {compat_level}");
+
+
+                var types = new[] { PersonType.Happy, PersonType.Sad };
+
                 var result = context.People.Where(p => types.Contains(p.Children.Any() ? PersonType.Happy : PersonType.Sad)).ToList();
                 Console.WriteLine($"It worked: {result.Count}");
             }
@@ -37,19 +41,21 @@ namespace ContainsOptimization
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public PersonType Type {get; set;}
+        public PersonType Type { get; set; }
         public virtual List<Child> Children { get; private set; }
     }
 
-    public class Child{
-        public int Id {get;set;}
-        public int PersonId {get;set;}
-        public Person Person {get;set;}
+    public class Child
+    {
+        public int Id { get; set; }
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
 
         public string Name { get; set; }
     }
 
-    public enum PersonType{
+    public enum PersonType
+    {
         Happy,
         Sad
     }
