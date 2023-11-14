@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      MSSQL_COLLATION: "Danish_Norwegian_CI_AS"
+      SA_PASSWORD: "SecretPassword1234"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "14330:1433"
+      - "14310:1431"
